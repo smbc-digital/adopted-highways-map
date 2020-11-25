@@ -1,5 +1,6 @@
 import Leaflet from 'leaflet'
-import { streetlightPopup } from './Popups'
+import { adopted_highwaysStyle, prowStyle } from './Style'
+import { prowPopup } from './Popups'
 
 const Configuration = {
     Map: {
@@ -14,24 +15,57 @@ const Configuration = {
     DynamicData: 
     [
         {
-            key: 'streetlights',
-            url: 'https://spatial.stockport.gov.uk/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=highways:street_lights&outputFormat=application/json&bbox={0},EPSG:4326&srsName=EPSG:4326',
+            key: 'Adopted Highways',
+            url: 'https://spatial.stockport.gov.uk/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=con29:2_1a&outputFormat=application/json&bbox={0},EPSG:4326&srsName=EPSG:4326',
             layerOptions: {
-                onEachFeature: streetlightPopup,
-                maxZoom: 16,
-                pointToLayer: (feature, latlng) => {
-                    return Leaflet.circleMarker(latlng, {
-                        radius: 8,
-                        fillColor: '#15863a',
-                        color: '#000',
-                        weight: 1,
-                        fillOpacity: 1
-                    })
-                },
+                style: adopted_highwaysStyle,
+                maxZoom: 14
             },
-            displayOverlay: false
+            displayOverlay: true,
+            visibleByDefault: true
+        },
+
+        {
+            key: 'Public Rights of Way',
+            url: 'https://spatial.stockport.gov.uk/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=highways:public_rights_of_way&outputFormat=application/json&bbox={0},EPSG:4326&srsName=EPSG:4326',
+            layerOptions: {
+                maxZoom: 2,
+                style: prowStyle,
+                onEachFeature: prowPopup
+            },
+            displayOverlay: true,
+            visibleByDefault: true
+        },
+        
+        {
+            key: 'os1250_line',
+            url: 'http://spatial.stockport.gov.uk/geoserver/wms?',
+            layerOptions: {
+                maxZoom: 20,
+                minZoom: 18,
+                layers: 'base_maps:os1250_line',
+                format: 'image/png',
+                transparent: true
+            },
+            displayOverlay: false,
+            visibleByDefault: true
+        },
+
+        {
+            key: 'os1250_text',
+            url: 'http://spatial.stockport.gov.uk/geoserver/wms?',
+            layerOptions: {
+                maxZoom: 20,
+                minZoom: 18,
+                layers: 'base_maps:os1250_text',
+                format: 'image/png',
+                transparent: true
+            },
+            displayOverlay: false,
+            visibleByDefault: true
         }
     ],
+
     StaticData: 
     [
         {
