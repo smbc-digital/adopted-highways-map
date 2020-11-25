@@ -5,7 +5,7 @@ import { prowPopup } from './Popups'
 const Configuration = {
     Map: {
         StartingLatLng: [53.3915, -2.125143],
-        StartingZoom: 12,
+        StartingZoom: 16,
         FullscreenControl: true,
         DisplayLayerControls: true,
         DisplayGrayScale: true,
@@ -34,7 +34,7 @@ const Configuration = {
                 onEachFeature: prowPopup
             },
             displayOverlay: true,
-            visibleByDefault: true
+            visibleByDefault: false
         },
         
         {
