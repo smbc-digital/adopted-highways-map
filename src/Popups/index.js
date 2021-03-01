@@ -6,7 +6,6 @@ const prowPopup = (feature, layer) => {
   <p></p>
   <p class="info">PROW Number: ${feature.properties.row}</p>
   <p class="info">Type: ${feature.properties.type}</p>
-  
   </div>`
  
   layer.bindPopup(content)
